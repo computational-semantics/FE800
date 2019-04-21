@@ -6,7 +6,11 @@ warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')
 from nltk.corpus import stopwords
 import gensim
 
-# Creating class DataCleaning. This class has methods that cleans that performs basic data cleaning operations such as removing non ASCII characters, removing punctuations, removing stopwords and many more.
+# Creating class DataCleaning. 
+# This class has methods that cleans that performs basic data cleaning operations such as:
+# removing non ASCII characters
+# removing punctuations
+#removing stopwords and many more.
 class DataCleaning:
     
     """DataCleaning has following attributes:
@@ -51,7 +55,7 @@ class DataCleaning:
         return new_words
 
     def remove_numbers(self):
-        """Remove stop words from list of tokenized words"""
+        """Remove numbers from list of tokenized words"""
         new_words = []
         for word in self.words:
             new_word = re.sub(r'\S*\d+\S*', '', word)
@@ -60,10 +64,19 @@ class DataCleaning:
         return new_words
 
     def remove_single_letter(self):
-        """Remove stop words from list of tokenized words"""
+        """Remove single letter words from list of tokenized words"""
         new_words = []
         for word in self.words:
             new_word = re.sub(r'^\w{1}$', '', word)
             if new_word != '':
+                new_words.append(new_word)
+        return new_words
+    
+    def remove_less_than_three_letters(self):
+        """Remove words less than 3 letters in size from list of tokenized words"""
+        new_words = []
+        for word in self.words:
+            new_word = word
+            if len(new_word) > 2:
                 new_words.append(new_word)
         return new_words
